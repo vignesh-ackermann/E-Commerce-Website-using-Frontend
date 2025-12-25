@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Vignesh Store | Smart Commerce</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #0c831f;
+            --gradient: linear-gradient(135deg, #0c831f, #1db954);
+            --bg: #f6f7f8;
+            --dark: #111;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Poppins
+        }
+
+        body {
+            background: var(--bg);
+            color: #222
+        }
+
+        /* HEADER */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, .85);
+            backdrop-filter: blur(12px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, .12);
+            z-index: 1000;
+        }
+
+        .navbar {
+            max-width: 1200px;
+            margin: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 20px;
+        }
+
+        .logo a {
+            font-size: 24px;
+            font-weight: bold;
+            text-decoration: none;
+            background: linear-gradient(135deg, #0c831f, #1db954);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+        .nav-links a {
+            margin: 0 12px;
+            cursor: pointer;
+            font-weight: 500;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -4px;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: .3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%
+        }
+
+        .cart-btn {
+            position: relative;
+            cursor: pointer;
+            font-size: 20px
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -6px;
+            right: -10px;
+            background: red;
+            color: #fff;
+            font-size: 12px;
+            padding: 2px 6px;
+            border-radius: 50%;
+        }
+
+        /* PAGE */
+        .page {
+            display: none;
+            padding-top: 90px
+        }
+
+        .page.active {
+            display: block
+        }
+
+        /* HERO */
+        .hero {
+            height: 90vh;
+            background: linear-gradient(rgba(0, 0, 0, .6), rgba(0, 0, 0, .4)),
+                url("https://images.pexels.com/photos/1840320/pexels-photo-1840320.jpeg") center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            text-align: center;
+            animation: fadeIn 1.2s ease;
+        }
+
+        .hero h1 {
+            font-size: 3.2rem
+        }
+
+        .hero p {
+            margin-top: 12px
+        }
+
+        /* SECTIONS */
+        .section {
+            max-width: 1200px;
+            margin: 80px auto;
+            padding: 0 20px;
+            animation: slideUp .8s ease;
+        }
+
+        .section h2 {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 2rem;
+        }
+
+        .section h2::after {
+            content: "";
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: var(--gradient);
+            margin: 12px auto;
+            border-radius: 10px;
+        }
+
+        /* GRIDS */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+
+        /* CARD */
+        .card {
+            background: #fff;
+            border-radius: 20px;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, .12);
+            overflow: hidden;
+            transition: .4s;
+        }
+
+        .card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, .18);
+        }
+
+        .card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover
+        }
+
+        .card div {
+            padding: 16px
+        }
+
+        /* BUTTON */
+        button {
+            background: var(--gradient);
+            border: none;
+            color: #fff;
+            padding: 12px;
+            border-radius: 30px;
+            cursor: pointer;
+            width: 100%;
+            transition: .3s;
+            font-weight: 500;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+            opacity: .9
+        }
+
+        /* SHOP TOOLS */
+        .shop-tools {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+
+        .shop-tools input,
+        .shop-tools select {
+            padding: 10px;
+            border-radius: 20px;
+            border: 1px solid #ccc;
+        }
+
+        .collections,
+        .blogs {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 28px;
+        }
+
+        /* CARDS */
+        .card {
+            background: #fff;
+            border-radius: 20px;
+            box-shadow: 0 12px 35px rgba(0, 0, 0, .12);
+            overflow: hidden;
+            transition: .4s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-8px) scale(1.01);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, .18);
+        }
+
+        .card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .card div {
+            padding: 16px;
+        }
+
+        /* CART */
+        .cart-drawer {
+            position: fixed;
+            right: -420px;
+            top: 0;
+            width: 400px;
+            height: 100%;
+            background: #fff;
+            box-shadow: -10px 0 40px rgba(0, 0, 0, .3);
+            transition: .45s;
+            z-index: 2000;
+            overflow-y: auto;
+        }
+
+        .cart-drawer.open {
+            right: 0
+        }
+
+        .cart-header {
+            background: var(--gradient);
+            color: #fff;
+            padding: 18px;
+            text-align: center;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            background: #f2f2f2;
+            padding: 10px;
+            border-radius: 10px;
+            margin: 10px;
+        }
+
+        .cart-total {
+            text-align: center;
+            font-weight: 600;
+            margin: 15px
+        }
+
+        /* CHECKOUT */
+        .checkout-form {
+            display: none;
+            padding: 15px
+        }
+
+        .checkout-form input,
+        .checkout-form select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+        }
+
+        /* POPUP */
+        .popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, .6);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 3000;
+        }
+
+        .popup-content {
+            background: #fff;
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            width: 90%;
+            max-width: 400px;
+            animation: pop .5s ease;
+        }
+
+        .truck {
+            font-size: 50px;
+            margin-top: 20px;
+            animation: truckMove 2s linear infinite;
+        }
+
+        /* FOOTER */
+        .site-footer {
+            background: linear-gradient(135deg, #111, #000);
+            color: #ddd;
+            margin-top: 80px;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 60px 20px 30px;
+        }
+
+        .footer-top {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 40px;
+        }
+
+        .footer-brand .footer-logo {
+            font-size: 26px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #0c831f, #1db954);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .footer-desc {
+            margin-top: 15px;
+            line-height: 1.6;
+            opacity: .85;
+        }
+
+        .footer-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 30px;
+        }
+
+        .footer-column h3 {
+            margin-bottom: 15px;
+            color: #fff;
+            font-size: 16px;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column li {
+            margin-bottom: 10px;
+        }
+
+        .footer-column a {
+            color: #ccc;
+            text-decoration: none;
+            position: relative;
+            transition: .3s;
+        }
+
+        .footer-column a::after {
+            content: "";
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #1db954;
+            transition: .3s;
+        }
+
+        .footer-column a:hover {
+            color: #fff;
+        }
+
+        .footer-column a:hover::after {
+            width: 100%;
+        }
+
+        .contact-info li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .footer-bottom {
+            margin-top: 50px;
+            border-top: 1px solid rgba(255, 255, 255, .1);
+            padding-top: 30px;
+            text-align: center;
+        }
+
+        .social-icons {
+            margin: 25px 0;
+        }
+
+        .social-icons a {
+            margin: 0 10px;
+            color: #ccc;
+            font-size: 18px;
+            transition: .3s;
+        }
+
+        .social-icons a:hover {
+            color: #1db954;
+            transform: translateY(-4px);
+        }
+
+        @media(max-width:900px) {
+            .footer-top {
+                grid-template-columns: 1fr;
+            }
+        }
+
+
+        /* ANIMATIONS */
+        @keyframes fadeIn {
+            from {
+                opacity: 0
+            }
+
+            to {
+                opacity: 1
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(30px);
+                opacity: 0
+            }
+
+            to {
+                transform: none;
+                opacity: 1
+            }
+        }
+
+        @keyframes pop {
+            from {
+                transform: scale(.7);
+                opacity: 0
+            }
+
+            to {
+                transform: scale(1);
+                opacity: 1
+            }
+        }
+
+        @keyframes truckMove {
+            from {
+                transform: translateX(-40px)
+            }
+
+            to {
+                transform: translateX(40px)
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="navbar">
+            <div class="logo">
+                <a href="#" onclick="openPage('home')">Vignesh Store</a>
+            </div>
+
+            <div class="nav-links">
+                <a onclick="openPage('home')">Home</a>
+                <a onclick="openPage('shop')">Shop</a>
+                <a onclick="openPage('collections')">Collections</a>
+                <a onclick="openPage('blog')">Blog</a>
+                <a onclick="openPage('faq')">FAQ</a>
+            </div>
+            <div class="cart-btn" onclick="toggleCart()">
+                <i class="fa fa-shopping-cart"></i>
+                <span class="cart-count" id="cartCount">0</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- HOME -->
+    <section id="home" class="page active">
+        <div class="hero">
+            <div>
+                <h1>Smart, Fast & Reliable Shopping</h1>
+                <p>Advanced Frontend UI</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Popular Categories</h2>
+            <div class="grid">
+                <div class="card"><img src="https://images.pexels.com/photos/1983040/pexels-photo-1983040.jpeg">
+                    <div>Electronics</div>
+                </div>
+                <div class="card"><img src="https://images.pexels.com/photos/373945/pexels-photo-373945.jpeg">
+                    <div>Fashion</div>
+                </div>
+                <div class="card"><img src="https://images.pexels.com/photos/298863/pexels-photo-298863.jpeg">
+                    <div>Wearables</div>
+                </div>
+                <div class="card"><img src="https://images.pexels.com/photos/2335048/pexels-photo-2335048.jpeg">
+                    <div>Photography</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Featured Promotions</h2>
+            <div class="grid">
+                <div class="card"><img src="https://images.pexels.com/photos/279906/pexels-photo-279906.jpeg">
+                    <div>Camera Sale</div>
+                </div>
+                <div class="card"><img src="https://images.pexels.com/photos/3020129/pexels-photo-3020129.jpeg">
+                    <div>Smartwatch Deal</div>
+                </div>
+                <div class="card"><img src="https://images.pexels.com/photos/4110337/pexels-photo-4110337.jpeg">
+                    <div>Speaker Discount</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Customer Testimonials</h2>
+            <div class="grid">
+                <div class="card">
+                    <div>"Amazing experience!" – John</div>
+                </div>
+                <div class="card">
+                    <div>"Fast delivery!" – Sarah</div>
+                </div>
+                <div class="card">
+                    <div>"Loved the UI!" – Rahul</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Our Services</h2>
+            <div class="grid">
+                <div class="card">
+                    <div><i class="fa fa-truck"></i> Fast Delivery</div>
+                </div>
+                <div class="card">
+                    <div><i class="fa fa-lock"></i> Secure Payments</div>
+                </div>
+                <div class="card">
+                    <div><i class="fa fa-headset"></i> 24/7 Support</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Newsletter Signup</h2>
+            <div style="text-align:center">
+                <input id="newsletterEmail" placeholder="Email" style="padding:10px;border-radius:20px;width:250px">
+                <br><br>
+                <button onclick="subscribeNewsletter()" style="width:150px;margin-top:10px">
+                    Subscribe
+                </button>
+                <p id="newsletterMsg"></p>
+            </div>
+        </div>
+
+        </div>
+
+        <div class="section">
+            <h2>Featured Collections</h2>
+            <div class="grid">
+                <div class="card"><img src="https://images.pexels.com/photos/2797273/pexels-photo-2797273.jpeg">
+                    <div>New Arrivals</div>
+                </div>
+                <div class="card"><img src="https://images.pexels.com/photos/2335048/pexels-photo-2335048.jpeg">
+                    <div>Trending</div>
+                </div>
+                <div class="card"><img src="https://images.pexels.com/photos/1983040/pexels-photo-1983040.jpeg">
+                    <div>Essentials</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SHOP -->
+    <section id="shop" class="page">
+        <div class="section">
+            <h2>Shop Products</h2>
+            <div class="shop-tools">
+                <input id="searchInput" placeholder="Search products">
+                <select id="priceFilter">
+                    <option value="all">All Prices</option>
+                    <option value="100">Under ₹100</option>
+                    <option value="200">Under ₹200</option>
+                </select>
+            </div>
+            <div class="grid" id="productList"></div>
+        </div>
+    </section>
+
+    <!-- COLLECTIONS -->
+    <section id="collections" class="page">
+        <div class="section">
+            <h2>Featured Collections</h2>
+            <div class="collections">
+                <div class="card"><img src="https://images.pexels.com/photos/1983040/pexels-photo-1983040.jpeg">
+                    <div>Electronics</div>
+                </div>
+                <div class="card"><img src="https://images.pexels.com/photos/373945/pexels-photo-373945.jpeg">
+                    <div>Accessories</div>
+                </div>
+                <div class="card"><img src="https://images.pexels.com/photos/298863/pexels-photo-298863.jpeg">
+                    <div>Wearables</div>
+                </div>
+                <div class="card"><img src="https://images.pexels.com/photos/2335048/pexels-photo-2335048.jpeg">
+                    <div>Photography</div>
+                </div>
+                <div class="card"><img src="https://images.pexels.com/photos/2115257/pexels-photo-2115257.jpeg">
+                    <div>Gaming</div>
+                </div>
+                <div class="card"><img src="https://images.pexels.com/photos/1667088/pexels-photo-1667088.jpeg">
+                    <div>Audio</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BLOG -->
+    <section id="blog" class="page">
+        <div class="section">
+            <h2>Latest Blog Posts</h2>
+            <div class="blogs">
+                <div class="card"><img src="https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg">
+                    <div>Buying Smart Gadgets</div>
+                </div>
+                <div class="card"><img src="https://images.pexels.com/photos/3587478/pexels-photo-3587478.jpeg">
+                    <div>Tech Trends 2025</div>
+                </div>
+                <div class="card"><img src="https://images.pexels.com/photos/1181671/pexels-photo-1181671.jpeg">
+                    <div>E-commerce UX</div>
+                </div>
+                <div class="card"><img src="https://images.pexels.com/photos/1181345/pexels-photo-1181345.jpeg">
+                    <div>Frontend Performance</div>
+                </div>
+                <div class="card"><img src="https://images.pexels.com/photos/3861958/pexels-photo-3861958.jpeg">
+                    <div>Secure Payments</div>
+                </div>
+                <div class="card"><img src="https://images.pexels.com/photos/3862631/pexels-photo-3862631.jpeg">
+                    <div>Future of Delivery</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="page">
+        <div class="section">
+            <h2>FAQs</h2>
+            <div class="grid">
+                <div class="card">
+                    <div><b>Is payment secure?</b>
+                        <p>Yes, 100% secure.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div><b>Delivery time?</b>
+                        <p>24–48 hours.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div><b>Return policy?</b>
+                        <p>7 days return.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div><b>Cash on delivery?</b>
+                        <p>Available.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div><b>Support?</b>
+                        <p>24/7 support.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CART -->
+    <div class="cart-drawer" id="cartDrawer">
+        <div class="cart-header">
+            <button onclick="toggleCart()">⬅ Back</button>
+        </div><br>
+        <br>
+        <div class="cart-header">
+            <h3>Your Cart</h3>
+        </div>
+        <div id="cartItems">
+
+        </div>
+        <div class="cart-total" id="cartTotal"></div>
+        <button onclick="clearCart()">Clear Cart</button><br>
+        <br>
+        <button onclick="showCheckout()">Proceed to Checkout</button>
+        <div class="checkout-form" id="checkoutForm">
+            <input placeholder="Name">
+            <input placeholder="Address">
+            <input placeholder="Phone">
+            <button onclick="placeOrder()">Place Order</button>
+        </div>
+    </div>
+
+    <!-- POPUP -->
+    <div class="popup" id="popup">
+        <div class="popup-content">
+            <h3>Order Placed Successfully 🎉</h3>
+            <div class="truck">🚚</div>
+        </div>
+    </div>
+
+    <footer class="site-footer">
+        <div class="footer-container">
+
+            <!-- TOP SECTION -->
+            <div class="footer-top">
+
+                <!-- BRAND -->
+                <div class="footer-brand">
+                    <h2 class="footer-logo">Vignesh Store</h2>
+                    <p class="footer-desc">
+                        Smart, fast and reliable shopping experience with premium products
+                        and Blinkit-style delivery flow.
+                    </p>
+                </div>
+
+                <!-- LINKS -->
+                <div class="footer-links">
+
+                    <div class="footer-column">
+                        <h3>Quick Links</h3>
+                        <ul>
+                            <li><a href="#">Home</a></li>
+                            <li><a href="#">Shop</a></li>
+                            <li><a href="#">Collections</a></li>
+                            <li><a href="#">Blog</a></li>
+                            <li><a href="#">Contact</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-column">
+                        <h3>Customer Service</h3>
+                        <ul>
+                            <li><a href="#">FAQs</a></li>
+                            <li><a href="#">Returns</a></li>
+                            <li><a href="#">Shipping Info</a></li>
+                            <li><a href="#">Order Tracking</a></li>
+                            <li><a href="#">Privacy Policy</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-column">
+                        <h3>Company</h3>
+                        <ul>
+                            <li><a href="#">About Us</a></li>
+                            <li><a href="#">Careers</a></li>
+                            <li><a href="#">Press</a></li>
+                            <li><a href="#">Affiliates</a></li>
+                            <li><a href="#">Sustainability</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-column">
+                        <h3>Contact</h3>
+                        <ul class="contact-info">
+                            <li><i class="fa fa-envelope"></i> support@vigneshstore.com</li>
+                            <li><i class="fa fa-phone"></i> +1 (234) 567-890</li>
+                            <li><i class="fa fa-location-dot"></i> San Francisco, CA</li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- BOTTOM SECTION -->
+            <div class="footer-bottom">
+                <!-- SOCIAL -->
+                <div class="social-icons">
+                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+                </div>
+
+                <p class="copyright">
+                    © 2025 Vignesh Store. All Rights Reserved.
+                </p>
+            </div>
+
+        </div>
+    </footer>
+
+
+    <script>
+        const products = [
+            { n: "Camera", p: 299, i: "https://images.pexels.com/photos/90946/pexels-photo-90946.jpeg" },
+            { n: "Watch", p: 199, i: "https://images.pexels.com/photos/3020129/pexels-photo-3020129.jpeg" },
+            { n: "Speaker", p: 99, i: "https://images.pexels.com/photos/4110337/pexels-photo-4110337.jpeg" },
+            { n: "Mouse", p: 49, i: "https://images.pexels.com/photos/3945655/pexels-photo-3945655.jpeg" },
+            { n: "Keyboard", p: 89, i: "https://images.pexels.com/photos/2115257/pexels-photo-2115257.jpeg" },
+            { n: "Earbuds", p: 129, i: "https://images.pexels.com/photos/373945/pexels-photo-373945.jpeg" },
+            { n: "Power Bank", p: 79, i: "https://images.pexels.com/photos/159688/pexels-photo-159688.jpeg" },
+            { n: "Headset", p: 149, i: "https://images.pexels.com/photos/18105/pexels-photo.jpg" },
+            { n: "Stand", p: 59, i: "https://images.pexels.com/photos/4974914/pexels-photo-4974914.jpeg" },
+            { n: "Action Cam", p: 179, i: "https://images.pexels.com/photos/279906/pexels-photo-279906.jpeg" },
+            { n: "Laptop Bag", p: 99, i: "https://images.pexels.com/photos/1181345/pexels-photo-1181345.jpeg" },
+            { n: "Charger", p: 39, i: "https://images.pexels.com/photos/159688/pexels-photo-159688.jpeg" }
+        ];
+        function openPage(page) {
+            if (page === "home") {
+                // Example behavior
+                alert("Home page opened");
+                // OR use real navigation:
+                // window.location.href = "index.html";
+            }
+        }
+
+        let cart = [];
+
+        function openPage(id) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+        }
+
+        function toggleCart() { cartDrawer.classList.toggle("open") }
+
+
+        function renderProducts(list) {
+            productList.innerHTML = "";
+            list.forEach(p => {
+                productList.innerHTML += `
+<div class="card">
+<img src="${p.i}">
+<div><h4>${p.n}</h4><p>₹${p.p}</p>
+<button onclick="addToCart('${p.n}',${p.p})">Add</button></div>
+</div>`;
+            });
+        }
+        renderProducts(products);
+
+        searchInput.oninput = e => {
+            renderProducts(products.filter(p => p.n.toLowerCase().includes(e.target.value.toLowerCase())));
+        }
+        priceFilter.onchange = e => {
+            renderProducts(e.target.value === "all" ? products : products.filter(p => p.p <= e.target.value));
+        }
+
+        function addToCart(n, p) {
+            cart.push({ n, p });
+            cartCount.innerText = cart.length;
+            updateCart();
+        }
+
+        function updateCart() {
+            cartItems.innerHTML = "";
+            let t = 0;
+            cart.forEach(i => { t += i.p; cartItems.innerHTML += `<div class="cart-item"><span>${i.n}</span><span>₹${i.p}</span></div>` });
+            cartTotal.innerText = "Total ₹" + t;
+        }
+        function clearCart() {
+            cart = [];
+            localStorage.removeItem("cart");
+            updateCart();
+        }
+
+        function showCheckout() { checkoutForm.style.display = "block" }
+
+        function placeOrder() {
+            popup.style.display = "flex";
+            cart = []; cartCount.innerText = 0;
+            setTimeout(() => popup.style.display = "none", 4000);
+        }
+
+        function subscribeNewsletter() {
+            const emailInput = document.getElementById("newsletterEmail");
+            const message = document.getElementById("newsletterMsg");
+
+            const email = emailInput.value.trim();
+
+            if (email === "") {
+                message.style.color = "red";
+                message.innerText = "Email is required.";
+                return;
+            }
+
+            if (!email.includes("@") || !email.includes(".")) {
+                message.style.color = "red";
+                message.innerText = "Please enter a valid email address.";
+                return;
+            }
+
+            message.style.color = "green";
+            message.innerText = "Subscription successful! 🎉";
+
+            emailInput.value = "";
+        }
+    </script>
+
+
+</body>
+
+</html>
